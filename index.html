@@ -1,0 +1,273 @@
+<html>
+<head>
+  <title>Tic Tac Toe</title>
+  <style>
+    body {
+      background-color: #1D1D1D;
+    }
+
+    .L1, .L2, .L3 {
+      background-color: #1D1D1D;
+      border: none;
+      height: 50px;
+      width: 70px;
+      font-size: 40px;
+      text-align: center;
+      color: white;
+      font-family: Forte, Stencil Std, Calibri;
+      position: relative;
+      top: 20%;
+      left: 15%;
+    }
+
+    .L1:focus, .L2:focus, .L3:focus {
+      outline: none;
+    }
+
+    #d {
+      border-top: 1px solid white;
+      border-bottom: 1px solid white;
+    }
+
+    #b {
+      border-bottom: 1px solid white;
+      border-left: 1px solid white;
+      border-right: 1px solid white;
+    }
+
+    #c, #f {
+      border-bottom: 1px solid white;
+    }
+
+    #e {
+      border-left: 1px solid white;
+      border-right: 1px solid white;
+      border-bottom: 1px solid white;
+    }
+
+    #h {
+      border-left: 1px solid white;
+      border-right: 1px solid white;
+    }
+
+    #Res {
+      margin: 0 40px;
+      height: 35px;
+      line-height: 17px;
+      width: 150px;
+      font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      color: #05750A;
+      background-color: #F6FAF1;
+      border: 2px solid #9CC784;
+      position: fixed;
+      top: -10%;
+      left: 0%;
+      right: 0%;
+      margin: auto;
+      text-align: center;
+      box-shadow: 5px 7px 35px 10px black;
+    }
+
+    #Score {
+      height: 30px;
+      line-height: 30px;
+      width: 300px;
+      font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
+      font-size: 18px;
+      color: #05750A;
+      background-color: #F6FAF1;
+      border: 2px solid #9CC784;
+      position: fixed;
+      bottom: 2%;
+      left: 0%;
+      right: 0%;
+      margin: auto;
+      text-align: center;
+      box-shadow: 5px 7px 35px 10px black;
+    }
+  </style>
+</head>
+<body>
+  <div id="Res" align="center">Congratulations!<br/>You Won!</div> 
+  <div id="Score" align="center">WON- 0 : 0 -LOST</div> 
+
+  <input class="L1" id="a" type="Button" value=" " onclick="ClickOnButton('L1',0)"/>
+  <input class="L1" id="b" type="Button" value=" " onclick="ClickOnButton('L1',1)"/>
+  <input class="L1" id="c" type="Button" value=" " onclick="ClickOnButton('L1',2)"/>
+  <br/>
+  
+  <input class="L2" id="d" type="Button" value=" " onclick="ClickOnButton('L2',0)" />
+  <input class="L2" id="e" type="Button" value=" " onclick="ClickOnButton('L2',1)"/>
+  <input class="L2" id="f" type="Button" value=" " onclick="ClickOnButton('L2',2)"/>
+  <br/>
+  
+  <input class="L3" id="g" type="Button" value=" " onclick="ClickOnButton('L3',0)" />
+  <input class="L3" id="h" type="Button" value=" " onclick="ClickOnButton('L3',1)"/>
+  <input class="L3" id="i" type="Button" value=" " onclick="ClickOnButton('L3',2)"/>
+
+  <script>
+    var Won = 0, Lost = 0;
+    var GameOver = false;
+    var U = document.getElementsByClassName("L1");
+    var M = document.getElementsByClassName("L2");
+    var L = document.getElementsByClassName("L3");
+
+    function ClickOnButton(ClassName, Index) {
+      var Button = document.getElementsByClassName(ClassName);
+      if (Button[Index].value == " " && !GameOver) {
+        Button[Index].value = "O";
+        Result();
+        if (GameOver == false) {
+          ComputerPlays();
+        }
+      }
+    }
+
+    function ComputerPlays() {
+      // AI move logic
+      if (U[0].value == "X" && U[1].value == "X" && U[2].value == " ") {
+        U[2].value = "X";
+      } else if (U[0].value == "X" && U[2].value == "X" && U[1].value == " ") {
+        U[1].value = "X";
+      } else if (U[1].value == "X" && U[2].value == "X" && U[0].value == " ") {
+        U[0].value = "X";
+      } else if (M[0].value == "X" && M[1].value == "X" && M[2].value == " ") {
+        M[2].value = "X";
+      } else if (M[0].value == "X" && M[2].value == "X" && M[1].value == " ") {
+        M[1].value = "X";
+      } else if (M[1].value == "X" && M[2].value == "X" && M[0].value == " ") {
+        M[0].value = "X";
+      } else if (L[0].value == "X" && L[1].value == "X" && L[2].value == " ") {
+        L[2].value = "X";
+      } else if (L[0].value == "X" && L[2].value == "X" && L[1].value == " ") {
+        L[1].value = "X";
+      } else if (L[1].value == "X" && L[2].value == "X" && L[0].value == " ") {
+        L[0].value = "X";
+      } else if (U[0].value == "X" && M[0].value == "X" && L[0].value == " ") {
+        L[0].value = "X";
+      } else if (L[0].value == "X" && M[0].value == "X" && U[0].value == " ") {
+        U[0].value = "X";
+      } else if (U[0].value == "X" && L[0].value == "X" && M[0].value == " ") {
+        M[0].value = "X";
+      } else if (U[1].value == "X" && M[1].value == "X" && L[1].value == " ") {
+        L[1].value = "X";
+      } else if (L[1].value == "X" && M[1].value == "X" && U[1].value == " ") {
+        U[1].value = "X";
+      } else if (U[1].value == "X" && L[1].value == "X" && M[1].value == " ") {
+        M[1].value = "X";
+      } else if (U[2].value == "X" && M[2].value == "X" && L[2].value == " ") {
+        L[2].value = "X";
+      } else if (L[2].value == "X" && M[2].value == "X" && U[2].value == " ") {
+        U[2].value = "X";
+      } else if (U[2].value == "X" && L[2].value == "X" && M[2].value == " ") {
+        M[2].value = "X";
+      } else if (U[0].value == "X" && M[1].value == "X" && L[2].value == " ") {
+        L[2].value = "X";
+      } else if (L[2].value == "X" && M[1].value == "X" && U[0].value == " ") {
+        U[0].value = "X";
+      } else if (U[0].value == "X" && L[2].value == "X" && M[1].value == " ") {
+        M[1].value = "X";
+      } else if (U[2].value == "X" && M[1].value == "X" && L[0].value == " ") {
+        L[0].value = "X";
+      } else if (L[0].value == "X" && M[1].value == "X" && U[2].value == " ") {
+        U[2].value = "X";
+      } else if (U[2].value == "X" && L[0].value == "X" && M[1].value == " ") {
+        M[1].value = "X";
+      } else {
+        for (var i = 0; i < 3; i++) {
+          for (var j = 0; j < 3; j++) {
+            if (U[i].value == " ") {
+              U[i].value = "X";
+              return;
+            }
+            if (M[i].value == " ") {
+              M[i].value = "X";
+              return;
+            }
+            if (L[i].value == " ") {
+              L[i].value = "X";
+              return;
+            }
+          }
+        }
+      }
+      Result();
+    }
+
+    function Result() {
+      var C = [U[0].value, U[1].value, U[2].value, M[0].value, M[1].value, M[2].value, L[0].value, L[1].value, L[2].value];
+      var W = "O";
+      for (var i = 0; i < 3; i++) {
+        if (C[i * 3] == W && C[i * 3 + 1] == W && C[i * 3 + 2] == W) {
+          alert("You won!");
+          Won++;
+          GameOver = true;
+          document.getElementById("Score").innerHTML = "WON- " + Won + " : " + Lost + " -LOST";
+          return;
+        }
+        if (C[i] == W && C[i + 3] == W && C[i + 6] == W) {
+          alert("You won!");
+          Won++;
+          GameOver = true;
+          document.getElementById("Score").innerHTML = "WON- " + Won + " : " + Lost + " -LOST";
+          return;
+        }
+      }
+      if (C[0] == W && C[4] == W && C[8] == W) {
+        alert("You won!");
+        Won++;
+        GameOver = true;
+        document.getElementById("Score").innerHTML = "WON- " + Won + " : " + Lost + " -LOST";
+        return;
+      }
+      if (C[2] == W && C[4] == W && C[6] == W) {
+        alert("You won!");
+        Won++;
+        GameOver = true;
+        document.getElementById("Score").innerHTML = "WON- " + Won + " : " + Lost + " -LOST";
+        return;
+      }
+      W = "X";
+      for (var i = 0; i < 3; i++) {
+        if (C[i * 3] == W && C[i * 3 + 1] == W && C[i * 3 + 2] == W) {
+          alert("Computer won!");
+          Lost++;
+          GameOver = true;
+          document.getElementById("Score").innerHTML = "WON- " + Won + " : " + Lost + " -LOST";
+          return;
+        }
+        if (C[i] == W && C[i + 3] == W && C[i + 6] == W) {
+          alert("Computer won!");
+          Lost++;
+          GameOver = true;
+          document.getElementById("Score").innerHTML = "WON- " + Won + " : " + Lost + " -LOST";
+          return;
+        }
+      }
+      if (C[0] == W && C[4] == W && C[8] == W) {
+        alert("Computer won!");
+        Lost++;
+        GameOver = true;
+        document.getElementById("Score").innerHTML = "WON- " + Won + " : " + Lost + " -LOST";
+        return;
+      }
+      if (C[2] == W && C[4] == W && C[6] == W) {
+        alert("Computer won!");
+        Lost++;
+        GameOver = true;
+        document.getElementById("Score").innerHTML = "WON- " + Won + " : " + Lost + " -LOST";
+        return;
+      }
+      for (var i = 0; i < 9; i++) {
+        if (C[i] == " ") {
+          return;
+        }
+      }
+      alert("Draw!");
+      GameOver = true;
+    }
+  </script>
+</body>
+</html>
+
